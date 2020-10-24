@@ -156,7 +156,35 @@ app.get("/blogs/:id",function(req,res){
 
 });
 app.get("/blogs/:id/edit",function(req,res){
-    res.send("Edit blog");
+    var oneBlog = null;
+    Blog.findById(req.params.id,function(err,posts){
+        if(err){
+            console.log(err);
+            console.log("Error parsing DB");
+        }
+        else{
+            console.log("My POST");
+            console.log(posts);
+            oneBlog = posts;
+
+            Blog.find({},function(err,posts){
+                console.log("X=");
+                console.log(oneBlog);
+                var data = {
+                    posts:posts,
+                    oneblog:oneBlog
+                };
+                if(err){
+                    console.log("Error parsing DB");
+                }
+                else{
+                    console.log("\n\n\n\nMy posts\n\n\n");
+                    console.log(posts);
+                    res.render("editpost",{posts:data});
+                }
+            });
+        }
+    });
 });
 app.put("/blogs/:id",function(req,res){
     res.send("Update one blog");

@@ -26,6 +26,10 @@
 
 <div style="display:inline-flex;width: 100%;margin-top: 8%;">
   
+  <div style="width:55%;max-height:100%;background-image: url('/img/update.svg');background-position: 60% -50%;background-repeat: no-repeat;">
+
+  </div>
+  
   <div style="width: 45%;">
     <div class="ui segment" style="width: 70%;margin:0 auto;box-shadow: 5px 5px 50px 10px #ccc;border-radius: 10px;">
       <form id="createform" class="ui form" style="width: 100%;">
@@ -43,7 +47,7 @@
             <div class="required field" style="min-width: 100%;">
                 <label>Title</label>
                 <div class="ui left icon input">
-                  <input id="title" type="text" name="title" placeholder="Title of the post" style="background-color: whitesmoke;" required>
+                  <input id="title" type="text" name="title" placeholder="Title of the post" value="<%=posts.oneblog.title%>" style="background-color:whitesmoke;" required>
                   <i class="pencil alternate icon"></i>
                 </div>
               </div>
@@ -52,32 +56,29 @@
         <div class="field" style="min-width: 100%;">
             <label>Author</label>
             <div class="ui left icon input">
-              <input id="author" type="text" name="author" placeholder="Author" style="background-color: whitesmoke;" required> 
+              <input id="author" type="text" name="author" placeholder="Author" value="<%=posts.oneblog.author%>" style="background-color: whitesmoke;" required > 
               <i class="user icon"></i>
             </div>       
         </div>
         <div class="field" style="min-width: 100%;">
           <label>Image Link</label>
           <div class="ui left icon input">
-            <input id="imagelink" type="text" name="imagelink" placeholder="Image Link" style="background-color: whitesmoke;" required> 
+            <input id="imagelink" type="text" name="imagelink" value="<%=posts.oneblog.imageLink%>" placeholder="Image Link"  style="background-color: whitesmoke;" required> 
             <i class="image icon"></i>
           </div>       
         </div>
         <div class="field" style="min-width: 100%;">
             <label>Description</label>
-            <textarea id="desp" name="desp" style="background-color: whitesmoke;margin-top: 0px; margin-bottom: 0px; height: 112px;min-width: 100%;" required></textarea>
+            <textarea id="desp" name="desp" style="background-color: whitesmoke;margin-top: 0px; margin-bottom: 0px; height: 112px;min-width: 100%;" required><%=posts.oneblog.description%></textarea>
         </div>
         <button class="ui button large primary" type="submit" onclick="sub(event)" style="width: 100%;margin:10px auto;text-align: center;border-radius: 20px;">
-          Create
+          Update
           <i class="arrow circle right icon"></i>
         </button>
       </form>
     </div>  
   </div>
 
-  <div style="width:55%;max-height:100%;background-image: url('/img/create.svg');background-position: 80% -50%;background-repeat: no-repeat;">
-
-  </div>
 </div>
 
 <div class="ui basic modal">
