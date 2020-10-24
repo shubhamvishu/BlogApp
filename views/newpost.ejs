@@ -1,0 +1,161 @@
+<%- include('./partials/header.ejs') %>
+
+<body>
+  <div class="ui black inverted menu" style="width:100%;height:10%;position: fixed;top: 0;left: 0;z-index: 1;">
+    <a href="/home" class="active item">
+      <i class="home icon"></i> Home
+    </a>
+    <a href="/news" class="item">
+      <i class="mail icon"></i> News
+    </a>
+    <a href="/blogs" class="item">
+      <i class="user icon"></i> Blogs
+    </a>
+    <div class="right menu">
+      <div class="item">
+        <div class="ui icon input">
+          <input type="text" placeholder="Search...">
+          <i class="search link icon"></i>
+        </div>
+      </div>
+      <a class="ui item">
+        Logout
+      </a>
+    </div>
+</div>
+
+<div style="display:inline-flex;width: 100%;margin-top: 8%;">
+  
+  <div style="width: 45%;">
+    <div class="ui segment" style="width: 70%;margin:0 auto;box-shadow: 5px 5px 50px 10px #ccc;border-radius: 10px;">
+      <form id="createform" class="ui form" style="width: 100%;">
+        <a href="/blogs" class="ui left floated">
+          <i class="left arrow large icon"></i>
+        </a>
+        <h1 class="center" style="text-align: center;">Create Post</h1>
+        <!--<div class="ui positive message">
+            <div class="header">Could you check something!</div>
+            <ul class="list">
+            <li>You forgot your <b>first name</b></li>
+            </ul>
+        </div>-->
+        <div class="fields">
+            <div class="required field" style="min-width: 100%;">
+                <label>Title</label>
+                <div class="ui left icon input">
+                  <input id="title" type="text" name="title" placeholder="Title of the post" style="background-color: whitesmoke;" required>
+                  <i class="pencil alternate icon"></i>
+                </div>
+              </div>
+        </div>
+      
+        <div class="field" style="min-width: 100%;">
+            <label>Author</label>
+            <div class="ui left icon input">
+              <input id="author" type="text" name="author" placeholder="Author" style="background-color: whitesmoke;" required> 
+              <i class="user icon"></i>
+            </div>       
+        </div>
+        <div class="field" style="min-width: 100%;">
+          <label>Image Link</label>
+          <div class="ui left icon input">
+            <input id="imagelink" type="text" name="imagelink" placeholder="Image Link" style="background-color: whitesmoke;" required> 
+            <i class="image icon"></i>
+          </div>       
+        </div>
+        <div class="field" style="min-width: 100%;">
+            <label>Description</label>
+            <textarea id="desp" name="desp" style="background-color: whitesmoke;margin-top: 0px; margin-bottom: 0px; height: 112px;min-width: 100%;" required></textarea>
+        </div>
+        <button class="ui button large primary" type="submit" onclick="sub(event)" style="width: 100%;margin:10px auto;text-align: center;border-radius: 20px;">
+          Create
+          <i class="arrow circle right icon"></i>
+        </button>
+      </form>
+    </div>  
+  </div>
+
+  <div style="width:55%;max-height:100%;background-image: url('/img/create.svg');background-position: 80% -50%;background-repeat: no-repeat;">
+
+  </div>
+</div>
+
+<div class="ui basic modal">
+  <div class="ui icon header">
+    <i class="check circle large green icon"></i>
+    Successfully Posted !!
+  </div>
+  <div class="content">
+    <p style="text-align:center;">You have successfully posted the blog at <%= new Date().toLocaleDateString();%></p>
+  </div>
+  <div class="actions">
+    <div class="ui red basic cancel inverted button">
+      <i class="remove icon"></i>
+      No
+    </div>
+    <a href="/blogs" class="ui green ok inverted button">
+      <i class="checkmark icon"></i>
+      Yes
+    </a>
+  </div>
+</div>
+
+<script type="text/javascript">
+    $('.ui.checkbox')
+    .checkbox()
+    ;
+    function sub(event) {
+        window.stop();
+        event.preventDefault();
+        if($('#title').val()!="" && $('#author').val()!="" && $('#imagelink').val()!="" && $('#desp').val()!="" ){
+          form = document.getElementById("createform");
+          form.action = '/blogs';
+          form.method = 'POST';
+          console.log("SUBBB");
+          form.submit();
+          func2();
+        }
+        else{
+
+        }
+        
+        return false;
+        //$(this).submit();
+      }
+    function func2() {
+
+      console.log("Post submission");
+
+
+      /*let form = document.getElementById("createform");
+      form.action = '/blogs';
+      form.method = 'POST';*/
+      /*$('#createform').submit(function(event) {
+        event.preventDefault();
+        console.log("SUBBB");
+        $(this).submit();
+      }); */
+      //form.submit();
+      //window.stop();
+          $('.ui.basic.modal')
+            .modal({
+              closable  : false,
+              onDeny    : function(){
+                window.alert('Wait not yet!');
+                return false;
+              },
+              onApprove : function() {
+                window.alert('Approved!');
+              }
+            })
+            .modal('show')
+          ;
+          /*$('.ui.basic.modal')
+          .modal('show')
+        ; */
+        
+      //window.stop();
+        
+    }
+</script>
+<%- include('./partials/footer.ejs') %>
