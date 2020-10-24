@@ -165,7 +165,7 @@ app.delete("/blogs/:id",function(req,res){
     res.send("Delete blog");
 });
 
-//Other
+//Other Routes
 app.get("/",function(req,res){
     res.send("homepage");
 });
@@ -178,5 +178,3 @@ app.get("/*",function(req,res){
 app.listen(8080,function(){
     console.log("EXPRESS");
 });
-
-// 8273039556 
