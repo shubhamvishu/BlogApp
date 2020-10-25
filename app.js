@@ -205,7 +205,7 @@ app.put("/blogs/:id",function(req,res){
             res.redirect("/blogs");
         }
     });
-    res.send("Update one blog");
+    //res.send("Update one blog");
 });
 app.delete("/blogs/:id",function(req,res){
     
