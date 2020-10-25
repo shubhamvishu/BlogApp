@@ -1,19 +1,22 @@
 const { default: Axios } = require("axios");
+const e = require("express");
 
 var express =  require("express"),
     app = express(),
     bodyParser = require('body-parser'),
     request = require('request'),
+    methodOverride = require("method-override"),
     mongoose = require('mongoose'),
     axios = require('axios');
 
-//mongoose.connect("mongodb://localhost/blogapp",{ useNewUrlParser: true,useUnifiedTopology: true} );
-mongoose.connect("mongodb+srv://user1:IoNJJMT0O7IC7Y0C@blogapp.9nfl6.mongodb.net/blogapp?retryWrites=true&w=majority",{ useNewUrlParser: true,useUnifiedTopology: true} );
+mongoose.connect("mongodb://localhost/blogapp",{ useNewUrlParser: true,useUnifiedTopology: true} );
+//mongoose.connect("mongodb+srv://user1:IoNJJMT0O7IC7Y0C@blogapp.9nfl6.mongodb.net/blogapp?retryWrites=true&w=majority",{ useNewUrlParser: true,useUnifiedTopology: true} );
 
-
+mongoose.set('useFindAndModify', false);
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine","ejs");
+app.use(methodOverride("_method"));
 
 var blogsSchema = new mongoose.Schema({
     title:String,
@@ -87,7 +90,7 @@ app.get("/blogs",function(req,res){
             console.log("Error parsing DB");
         }
         else{
-            console.log("My posts");
+            console.log("GET ALL POSTS");
             console.log(posts);
             res.render("blogs",{posts:data});
         }
@@ -145,7 +148,7 @@ app.get("/blogs/:id",function(req,res){
                     console.log("Error parsing DB");
                 }
                 else{
-                    console.log("My posts");
+                    console.log("GET 1 BLOG ID");
                     console.log(posts);
                     res.render("blogs",{posts:data});
                 }
@@ -157,13 +160,14 @@ app.get("/blogs/:id",function(req,res){
 });
 app.get("/blogs/:id/edit",function(req,res){
     var oneBlog = null;
+
     Blog.findById(req.params.id,function(err,posts){
         if(err){
             console.log(err);
             console.log("Error parsing DB");
         }
         else{
-            console.log("My POST");
+            console.log("NEW");
             console.log(posts);
             oneBlog = posts;
 
@@ -178,7 +182,7 @@ app.get("/blogs/:id/edit",function(req,res){
                     console.log("Error parsing DB");
                 }
                 else{
-                    console.log("\n\n\n\nMy posts\n\n\n");
+                    console.log("\n\n\n\nEDIT PAGE\n\n\n");
                     console.log(posts);
                     res.render("editpost",{posts:data});
                 }
@@ -187,10 +191,32 @@ app.get("/blogs/:id/edit",function(req,res){
     });
 });
 app.put("/blogs/:id",function(req,res){
+    console.log("\n\n\n\nPUT\n\n\n");
+    console.log(req.param.id);
+    
+    Blog.findByIdAndUpdate(req.params.id,req.body.blog,function(err, updatedBlog){
+        if(err){
+            console(err);
+            //res.redirect("/blogs");
+        }
+        else{
+            console.log("UPDATED");
+            console.log(updatedBlog);
+            res.redirect("/blogs");
+        }
+    });
     res.send("Update one blog");
 });
 app.delete("/blogs/:id",function(req,res){
-    res.send("Delete blog");
+    
+    Blog.findByIdAndRemove(req.params.id,function(err){
+        if(err){
+            console.log(err);
+        }
+        else{
+            res.redirect("/blogs");
+        }
+    });
 });
 
 //Other Routes

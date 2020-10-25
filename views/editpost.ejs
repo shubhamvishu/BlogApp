@@ -47,7 +47,7 @@
             <div class="required field" style="min-width: 100%;">
                 <label>Title</label>
                 <div class="ui left icon input">
-                  <input id="title" type="text" name="title" placeholder="Title of the post" value="<%=posts.oneblog.title%>" style="background-color:whitesmoke;" required>
+                  <input id="title" type="text" name="blog[title]" placeholder="Title of the post" value="<%=posts.oneblog.title%>" style="background-color:whitesmoke;" required>
                   <i class="pencil alternate icon"></i>
                 </div>
               </div>
@@ -56,26 +56,36 @@
         <div class="field" style="min-width: 100%;">
             <label>Author</label>
             <div class="ui left icon input">
-              <input id="author" type="text" name="author" placeholder="Author" value="<%=posts.oneblog.author%>" style="background-color: whitesmoke;" required > 
+              <input id="author" type="text" name="blog[author]" placeholder="Author" value="<%=posts.oneblog.author%>" style="background-color: whitesmoke;" required > 
               <i class="user icon"></i>
             </div>       
         </div>
         <div class="field" style="min-width: 100%;">
           <label>Image Link</label>
           <div class="ui left icon input">
-            <input id="imagelink" type="text" name="imagelink" value="<%=posts.oneblog.imageLink%>" placeholder="Image Link"  style="background-color: whitesmoke;" required> 
+            <input id="imagelink" type="text" name="blog[imageLink]" value="<%=posts.oneblog.imageLink%>" placeholder="Image Link"  style="background-color: whitesmoke;" required> 
             <i class="image icon"></i>
           </div>       
         </div>
         <div class="field" style="min-width: 100%;">
             <label>Description</label>
-            <textarea id="desp" name="desp" style="background-color: whitesmoke;margin-top: 0px; margin-bottom: 0px; height: 112px;min-width: 100%;" required><%=posts.oneblog.description%></textarea>
+            <textarea id="desp" name="blog[description]" style="background-color: whitesmoke;margin-top: 0px; margin-bottom: 0px; height: 112px;min-width: 100%;" required><%=posts.oneblog.description%></textarea>
         </div>
-        <button class="ui button large primary" type="submit" onclick="sub(event)" style="width: 100%;margin:10px auto;text-align: center;border-radius: 20px;">
-          Update
-          <i class="arrow circle right icon"></i>
-        </button>
+        <div style="display: flex; justify-content: space-between;">
+          <button id="update-btn" class="ui button large primary" data-id="<%=posts.oneblog._id%>" onclick="sub1(event)" style="text-align: center; display: inline-flex;width: 45%;margin:10px auto;text-align: center;border-radius: 20px;">
+            Update
+            <i class="arrow circle right icon"></i>
+          </button>
+          <button id="delete-btn" class="ui button large primary" data-id="<%=posts.oneblog._id%>" onclick="sub2(event)" style="text-align: center;display: inline-flex; width: 45%;margin:10px auto;text-align: center;border-radius: 20px;">
+            Delete
+            <i class="arrow circle right icon"></i>
+          </button>
+
+        </div>
+        
+        
       </form>
+      
     </div>  
   </div>
 
@@ -94,7 +104,7 @@
       <i class="remove icon"></i>
       No
     </div>
-    <a href="/blogs" class="ui green ok inverted button">
+    <a class="ui green ok inverted button">
       <i class="checkmark icon"></i>
       Yes
     </a>
@@ -105,29 +115,38 @@
     $('.ui.checkbox')
     .checkbox()
     ;
-    function sub(event) {
+    function sub1(event) {
         window.stop();
         event.preventDefault();
         if($('#title').val()!="" && $('#author').val()!="" && $('#imagelink').val()!="" && $('#desp').val()!="" ){
           form = document.getElementById("createform");
-          form.action = '/blogs';
+          blogid = document.querySelector("#update-btn").getAttribute("data-id");
+          form.action = '/blogs/'+blogid+"?_method=PUT";
           form.method = 'POST';
           console.log("SUBBB");
-          form.submit();
-          func2();
+          func2(form);
         }
         else{
 
         }
-        
-        return false;
         //$(this).submit();
       }
-    function func2() {
+      function sub2(event) {
+        window.stop();
+        event.preventDefault();
+          form = document.getElementById("createform");
+          blogid = document.querySelector("#delete-btn").getAttribute("data-id");
+          form.action = '/blogs/'+blogid+"?_method=DELETE";
+          form.method = 'POST';
+          console.log("SUBBB");
+          func2(form);
+        //$(this).submit();
+      }
+    function func2(form) {
 
-      console.log("Post submission");
-
-
+      console.log("delete submission");
+      console.log(form);
+      
       /*let form = document.getElementById("createform");
       form.action = '/blogs';
       form.method = 'POST';*/
@@ -140,13 +159,17 @@
       //window.stop();
           $('.ui.basic.modal')
             .modal({
-              closable  : false,
+              closable  : true,
               onDeny    : function(){
-                window.alert('Wait not yet!');
+                //form.submit();
                 return false;
               },
               onApprove : function() {
-                window.alert('Approved!');
+                //form.submit();
+                form.submit();
+                console.log("inside");
+                console.log(form);
+                //form.submit();
               }
             })
             .modal('show')

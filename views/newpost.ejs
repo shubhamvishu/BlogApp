@@ -67,7 +67,7 @@
             <label>Description</label>
             <textarea id="desp" name="desp" style="background-color: whitesmoke;margin-top: 0px; margin-bottom: 0px; height: 112px;min-width: 100%;" required></textarea>
         </div>
-        <button class="ui button large primary" type="submit" onclick="sub(event)" style="width: 100%;margin:10px auto;text-align: center;border-radius: 20px;">
+        <button class="ui button huge primary" type="submit" onclick="sub(event)" style="width: 100%;margin:10px auto;text-align: center;border-radius: 30px;">
           Create
           <i class="arrow circle right icon"></i>
         </button>
@@ -141,11 +141,11 @@
             .modal({
               closable  : false,
               onDeny    : function(){
-                window.alert('Wait not yet!');
+                
                 return false;
               },
               onApprove : function() {
-                window.alert('Approved!');
+                
               }
             })
             .modal('show')
