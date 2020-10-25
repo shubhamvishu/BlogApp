@@ -9,8 +9,8 @@ var express =  require("express"),
     mongoose = require('mongoose'),
     axios = require('axios');
 
-mongoose.connect("mongodb://localhost/blogapp",{ useNewUrlParser: true,useUnifiedTopology: true} );
-//mongoose.connect("mongodb+srv://user1:IoNJJMT0O7IC7Y0C@blogapp.9nfl6.mongodb.net/blogapp?retryWrites=true&w=majority",{ useNewUrlParser: true,useUnifiedTopology: true} );
+//ongoose.connect("mongodb://localhost/blogapp",{ useNewUrlParser: true,useUnifiedTopology: true} );
+mongoose.connect("mongodb+srv://user1:IoNJJMT0O7IC7Y0C@blogapp.9nfl6.mongodb.net/blogapp?retryWrites=true&w=majority",{ useNewUrlParser: true,useUnifiedTopology: true} );
 
 mongoose.set('useFindAndModify', false);
 app.use(express.static("public"));
