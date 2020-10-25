@@ -38,7 +38,7 @@ app.get("/news/top-headlines",function(req,res){
     getNewsEndpoint('https://newsapi.org/v2/top-headlines?country=in&apiKey=5026e5a981424f77910a4e5ef90ccaee',req,res);
 });
 app.get("/news/everything",function(req,res){
-    getNewsEndpoint('https://newsapi.org/v2/everything?sources=the-times-of-india&apiKey=5026e5a981424f77910a4e5ef90ccaee',req,res);
+    getNewsEndpoint('https://newsapi.org/v2/everything?q=world&apiKey=5026e5a981424f77910a4e5ef90ccaee',req,res);
 });
 app.get("/news/search/:query",function(req,res){
     getNewsEndpoint('https://newsapi.org/v2/top-headlines?q='+req.params.query+'&apiKey=5026e5a981424f77910a4e5ef90ccaee',req,res);
@@ -127,29 +127,29 @@ app.get("/blogs/:id",function(req,res){
     //res.send("<h1>Hello news</h1>");
     console.log("REQ id:"+ req.params.id);
     var oneBlog = null;
-    Blog.findById(req.params.id,function(err,posts){
+    Blog.findById(req.params.id,function(err,onepost){
         if(err){
             console.log(err);
-            console.log("Error parsing DB");
+            console.log("Error parsing DB I");
         }
         else{
             console.log("My POST");
-            console.log(posts);
-            oneBlog = posts;
+            console.log(onepost);
+            oneBlog = onepost;
 
-            Blog.find({},function(err,posts){
+            Blog.find({},function(err,allposts){
                 console.log("X=");
                 console.log(oneBlog);
                 var data = {
-                    posts:posts,
-                    oneblog:oneBlog
+                    posts:allposts,
+                    oneblog:onepost
                 };
                 if(err){
-                    console.log("Error parsing DB");
+                    console.log("Error parsing DB II");
                 }
                 else{
                     console.log("GET 1 BLOG ID");
-                    console.log(posts);
+                    console.log(oneBlog);
                     res.render("blogs",{posts:data});
                 }
             });
@@ -220,6 +220,9 @@ app.delete("/blogs/:id",function(req,res){
 });
 
 //Other Routes
+app.get("/home",function(req,res){
+    res.redirect("/");
+});
 app.get("/",function(req,res){
     res.send("homepage");
 });

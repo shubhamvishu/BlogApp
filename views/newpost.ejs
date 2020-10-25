@@ -28,7 +28,7 @@
   
   <div style="width: 45%;">
     <div class="ui segment" style="width: 70%;margin:0 auto;box-shadow: 5px 5px 50px 10px #ccc;border-radius: 10px;">
-      <form id="createform" class="ui form" style="width: 100%;">
+      <form id="createform" class="ui form" style="width: 100%;" method="POST" action="/blogs">
         <a href="/blogs" class="ui left floated">
           <i class="left arrow large icon"></i>
         </a>
@@ -67,7 +67,7 @@
             <label>Description</label>
             <textarea id="desp" name="desp" style="background-color: whitesmoke;margin-top: 0px; margin-bottom: 0px; height: 112px;min-width: 100%;" required></textarea>
         </div>
-        <button class="ui button huge primary" type="submit" onclick="sub(event)" style="width: 100%;margin:10px auto;text-align: center;border-radius: 30px;">
+        <button class="ui button huge primary" type="submit" onclick="sub()" style="width: 100%;margin:10px auto;text-align: center;border-radius: 30px;">
           Create
           <i class="arrow circle right icon"></i>
         </button>
@@ -91,12 +91,12 @@
   <div class="actions">
     <div class="ui red basic cancel inverted button">
       <i class="remove icon"></i>
-      No
+      Stay
     </div>
-    <a href="/blogs" class="ui green ok inverted button">
+    <div class="ui green ok inverted button">
       <i class="checkmark icon"></i>
-      Yes
-    </a>
+      Check All
+    </div>
   </div>
 </div>
 
@@ -105,20 +105,10 @@
     .checkbox()
     ;
     function sub(event) {
-        window.stop();
-        event.preventDefault();
         if($('#title').val()!="" && $('#author').val()!="" && $('#imagelink').val()!="" && $('#desp').val()!="" ){
           form = document.getElementById("createform");
-          form.action = '/blogs';
-          form.method = 'POST';
-          console.log("SUBBB");
-          form.submit();
           func2();
         }
-        else{
-
-        }
-        
         return false;
         //$(this).submit();
       }
@@ -141,11 +131,11 @@
             .modal({
               closable  : false,
               onDeny    : function(){
-                
+                location.replace("/blogs/new");
                 return false;
               },
               onApprove : function() {
-                
+                location.replace("/blogs");
               }
             })
             .modal('show')

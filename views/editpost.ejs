@@ -1,8 +1,12 @@
 <%- include('./partials/header.ejs') %>
 
 <body>
-  <div class="ui black inverted menu" style="width:100%;height:10%;position: fixed;top: 0;left: 0;z-index: 1;">
-    <a href="/home" class="active item">
+<div class="ui black inverted menu" style="width:100%;height:10%;position: fixed;top: 0;left: 0;z-index: 1;">
+    <a href="/home" class="top item">
+      <h2>BlogApp</h2>
+      <i class="big blue gripfire icon" style="margin:10px auto;display: block;"></i>  
+    </a>
+    <a href="/home" class="item">
       <i class="home icon"></i> Home
     </a>
     <a href="/news" class="item">
@@ -76,7 +80,7 @@
             Update
             <i class="arrow circle right icon"></i>
           </button>
-          <button id="delete-btn" class="ui button large primary" data-id="<%=posts.oneblog._id%>" onclick="sub2(event)" style="text-align: center;display: inline-flex; width: 45%;margin:10px auto;text-align: center;border-radius: 20px;">
+          <button id="delete-btn" class="ui button large red" data-id="<%=posts.oneblog._id%>" onclick="sub2(event)" style="text-align: center;display: inline-flex; width: 45%;margin:10px auto;text-align: center;border-radius: 20px;">
             Delete
             <i class="arrow circle right icon"></i>
           </button>
@@ -91,23 +95,23 @@
 
 </div>
 
-<div class="ui basic modal">
+<div class="ui modal">
   <div class="ui icon header">
-    <i class="check circle large green icon"></i>
-    Successfully Posted !!
+    <i class="window close large red icon"></i>
+    Are you sure you want to continue ??
   </div>
   <div class="content">
-    <p style="text-align:center;">You have successfully posted the blog at <%= new Date().toLocaleDateString();%></p>
+    <p style="text-align:center;">Note : This cannot be undone</p>
   </div>
   <div class="actions">
-    <div class="ui red basic cancel inverted button">
+    <div class="ui red cancel inverted button">
       <i class="remove icon"></i>
       No
     </div>
-    <a class="ui green ok inverted button">
+    <div class="ui green ok inverted button">
       <i class="checkmark icon"></i>
       Yes
-    </a>
+    </div>
   </div>
 </div>
 
@@ -157,11 +161,12 @@
       }); */
       //form.submit();
       //window.stop();
-          $('.ui.basic.modal')
+          $('.ui.modal')
             .modal({
               closable  : true,
               onDeny    : function(){
                 //form.submit();
+                location.replace("/blogs");
                 return false;
               },
               onApprove : function() {

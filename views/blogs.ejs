@@ -1,7 +1,11 @@
 <%- include('./partials/header.ejs') %>
 <body>
 <div class="ui black inverted menu" style="width:100%;height:10%;position: fixed;top: 0;left: 0;z-index: 1;">
-        <a href="/home" class="active item">
+        <a href="/home" class="top item">
+          <h2>BlogApp</h2>
+          <i class="big blue gripfire icon" style="margin:10px auto;display: block;"></i>  
+        </a>
+        <a href="/home" class="item">
           <i class="home icon"></i> Home
         </a>
         <a href="/news" class="item">
@@ -25,7 +29,7 @@
 
 <div class="ui left fixed vertical menu" style="top: 10%;width: 20%;background-color: whitesmoke;">
     
-    <i class="massive blue newspaper icon" style="margin:10px auto;display: block;transform: rotate(-10deg);"></i>
+    <i class="massive blue gripfire icon" style="margin:10px auto;display: block;"></i>
     
     <div class="ui centre aligned segment" style="width: 80%;margin: 10px auto;background-color: #fff;color: whitesmoke;">
         <div class="ui form">
@@ -69,7 +73,7 @@
         <input type="hidden" name="country">
         <i class="dropdown icon"></i>
         <div class="default text">Select Country</div>
-        <div id="choose" class="menu" onclick="myFunc()">
+        <div id="choose" class="menu">
           <div class="item" data-value="ad"><i class="ad flag"></i>Andorra</div>
           <div class="item" data-value="ae"><i class="ae flag"></i>United Arab Emirates</div>
           <div class="item" data-value="af"><i class="af flag"></i>Afghanistan</div>
@@ -317,7 +321,7 @@
     <a class="item">Features</a>
     <a class="item">Testimonials</a>
     <a class="ui button large green" href="/blogs/new" class="item" style="margin: 20px 20%; border-radius: 20px;">
-      Create Post
+      Create
       <i class="right plus circle icon"></i>
     </a>
 </div>
@@ -378,13 +382,13 @@
             </a>
         </div>
         <div class="description">
-          <p><%= post.description %> </p>
+          <p><%= post.description.substring(0,100) %> ......... </p>
         </div>
         <div class="extra">
             <a href="/blogs/<%=post._id%>/edit" class="ui right floated">
-                <i class="right edit large icon"></i>
+                <i class="right edit large grey icon"></i>
             </a>
-            <div class="ui label">Blog</div>
+            <div class="ui label" style="background-color: rgb(255, 240, 175);">Blog</div>
         </div>
       </div>
     </div>
@@ -415,7 +419,7 @@
     </div>
     <div class="image content">
       <div class="ui centered large image">
-        <img src="<%= posts.oneblog.imageLink %>">
+          <img src="<%= posts.oneblog.imageLink %>">
       </div>
       <div class="description">
         <div class="ui header"><span class="cinema">Author : <%= posts.oneblog.author %> , <%= posts.oneblog.date %></span></div>
@@ -425,12 +429,9 @@
       
     </div>
     <div class="actions">
-      <div class="ui black deny button">
-        No
-      </div>
-      <div class="ui positive right labeled icon button">
-        Yes
-        <i class="checkmark icon"></i>
+      <div class="ui black right icon button">
+        Like
+        <i class="thumbs up icon"></i>
       </div>
     </div>
   </div>
@@ -455,13 +456,13 @@
   function myFunc(){
       console.log("shubham");
       var t = document.getElementById("searchbox").value;
-      location.replace("/blogs/search/"+t);
+      //location.replace("/blogs/search/"+t);
   }
   function myFunc2(e){
       if(e.keyCode == 13){
         console.log("shubham");
         var t = document.getElementById("searchbox").value;
-        location.replace("/blogs/search/"+t);
+        //location.replace("/blogs/search/"+t);
       }
   }
 </script>

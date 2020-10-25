@@ -1,7 +1,11 @@
 <%- include('./partials/header.ejs') %>
 <body>
 <div class="ui black inverted menu" style="width:100%;height:10%;position: fixed;top: 0;left: 0;z-index: 1;">
-    <a href="/home" class="active item">
+    <a href="/home" class="top item">
+      <h2>BlogApp</h2>
+      <i class="big blue gripfire icon" style="margin:10px auto;display: block;"></i>  
+    </a>
+    <a href="/home" class="item">
       <i class="home icon"></i> Home
     </a>
     <a href="/news" class="item">
@@ -26,7 +30,7 @@
 <div class="ui left fixed vertical menu" style="top: 10%;width: 20%;background-color: whitesmoke;">
     
     
-    <i class="massive blue newspaper icon" style="margin:10px auto;display: block;transform: rotate(-10deg);"></i>
+    <i class="massive blue gripfire icon" style="margin:10px auto;display: block;"></i>
     
     <div class="ui centre aligned segment" style="width: 80%;margin: 10px auto;background-color: #fff;color: whitesmoke;">
         <div class="ui form">
@@ -318,7 +322,7 @@
     <a class="item">Features</a>
     <a class="item">Testimonials</a>
     <a class="ui button large green" href="/blogs/new" class="item" style="margin: 20px 20%; border-radius: 20px;">
-      Create Post
+      Create
       <i class="right plus circle icon"></i>
     </a>
 </div>
@@ -364,7 +368,7 @@
     <div class="results"></div>
 </div>
 
-<div class="ui divided items" style="width: 50%;margin: 3% auto;">
+<div class="ui divided items" style="width: 50%;margin: 3% auto;overflow: hidden;">
     <% if(newses.size) {%>
         <div class="ui success message">
             <i class="close icon"></i>
@@ -380,21 +384,32 @@
       </div>
       <div class="content">
         <a href="<%= news.url %>" target="_blank" class="header"><%= news.title %> </a>
-        <div class="meta">
-          <span class="cinema">Author : <%= news.author %> , <%= news.publishedAt %></span>
-        </div>
         <div class="description">
           <p><%= news.description %> </p>
         </div>
+        <div class="ui accordion">
+          <div class="title">
+            <i class="dropdown icon"></i>
+            Details
+          </div>
+          <div class="content" >
+            <div class="extra">
+              <% if(news.author!="" && news.author!=null){%> 
+              <div class="right floated author">
+                <img class="ui avatar image" src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"> <%= news.author %>
+              </div> 
+            <% } %> 
+              <p>Posted At : <span class="date"><%= news.publishedAt.substring(0,10) %> ,<%= news.publishedAt.substring(11,19) %></span></p>
+            </div>
+            <p style="width: 80%;">Link : <a href="<%=news.url%>"><%=news.url%></a></p>
+          </div>
+        </div>
         <div class="extra">
-          <a href="">
-
-          </a>
-          <a href="<%= news.url %>" class="ui right floated primary button">
+          <a href="<%= news.url %>" class="ui right floated primary button" style="box-shadow: 5px 10px 20px #aaa;">
              Go to news
             <i class="right chevron icon"></i>
           </a>
-          <div class="ui label"><%= news.source.name%></div>
+          <div class="ui label" style="background-color: rgb(255, 240, 175);"><%= news.source.name%></div>
         </div>
       </div>
     </div>
@@ -437,6 +452,9 @@
     // you can use any ui transition
     transition: 'drop'
   });
+  $('.ui.accordion')
+  .accordion()
+;
   $('.message .close').on('click', function() {
     $(this).closest('.message').fadeOut();
     });
