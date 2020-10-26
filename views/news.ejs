@@ -27,15 +27,14 @@
     </div>
 </div>
 
-<div class="ui left fixed vertical menu" style="top: 10%;width: 20%;background-color: whitesmoke;border: none;">
-    
+<div class="ui left fixed vertical menu" style="top: 10%;width: 20%;background-color: whitesmoke;border: none;box-shadow: inset 5px 10px 20px #ccc;">    
     
     <i class="massive blue gripfire icon" style="margin:10px auto;display: block;"></i>
     <div class="item">
-      <div class="ui centre aligned segment" style="width: 90%;margin: 10px auto;background-color: #fff;color: whitesmoke;border: none;box-shadow: -10px 10px 20px 20px #eee;">
+      <div class="ui centre aligned segment" style="width: 90%;margin: 10px auto;background-color: #fff;color: whitesmoke;border: none;box-shadow:  5px 10px 30px #ddd;">
         <div class="ui form">
             <div id="news-category" class="grouped fields">
-                <label for="fruit"><b>Select the category:</b></label>
+                <label for="fruit"><b>Select News category:</b></label>
                 <div class="field">
                     <div class="ui toggle checkbox">
                         <input id="check1" type="checkbox" tabindex="0" class="hidden" onchange="catfunc(event)">
@@ -60,10 +59,11 @@
     </div>
     
 
-    <div class="ui selection dropdown" style="margin:10px auto;width: 100%;border: none;">
+    <div class="item" style="margin: 10px auto;width: 80%;">
+      <div class="ui selection dropdown" style="margin:20px auto;border: none;box-shadow: -10px 10px 30px 10px #ddd;">
         <input type="hidden" name="gender">
-        <div class="default text">Country</div>
         <i class="dropdown icon"></i>
+        <div class="default text">Country</div>
         <div class="menu" style="margin:10px auto;width: 80%;">
           <a href="/news/in" class="item" data-value="in">India</a>
           <a href="/news/us" class="item" data-value="us">US</a>
@@ -71,8 +71,8 @@
           <a href="/news/ar" class="item" data-value="ar">Argentina</a>
           <a href="/news/au" class="item" data-value="au">Australia</a>
         </div>
-    </div>
-    <div class="ui fluid search selection dropdown" style="border: none;">
+      </div>
+      <div class="ui fluid search selection dropdown" style="border: none;box-shadow: -10px 10px 30px 10px #ddd;">
         <input type="hidden" name="country">
         <i class="dropdown icon"></i>
         <div class="default text">Select Country</div>
@@ -321,14 +321,18 @@
           <div class="item" data-value="zw"><i class="zw flag"></i>Zimbabwe</div>
         </div>
     </div>
-    <a class="ui button large green" href="/blogs/new" class="item" style="text-align:center;padding:20px 40px;margin: 30px 20%; border-radius: 30px;box-sizing: border-box;box-shadow: -10px 10px 30px 10px #bbb;">
-      Create
-      <i class="right plus circle icon"></i>
-    </a>
+    </div>
+    <div class="item" style="margin: 10px auto;width: 100%;">
+      <a class="ui button large green" href="/blogs/new" class="item" style="text-align:center;padding:20px 30px;margin: 30px 20%; border-radius: 30px;box-sizing: border-box;box-shadow: -10px 10px 30px 10px #bbb;">
+        Create
+        <i class="right plus circle icon"></i>
+      </a>
+    </div>
+    
 </div>
 
-<div class="ui right fixed vertical menu" style="top: 10%;width: 20%;background-color: whitesmoke;border: none;">
-    <div class="ui vertical menu">
+<div class="ui right fixed vertical menu" style="top: 10%;width: 20%;background-color: whitesmoke;border: none;box-shadow: inset 5px 10px 20px #ccc;">
+    <div class="ui vertical menu" style="border: none;box-shadow: 5px 10px 20px #ddd;margin: 10px auto;">
         <div class="item">
           <div class="ui input"><input type="text" placeholder="Search..."></div>
         </div>
@@ -380,7 +384,7 @@
     <% newses["data"].forEach((news)=>{ %>
     <div class="item">
       <div class="image">
-        <img src="<%= news.urlToImage %>">
+        <img src="<%= news.urlToImage %>" style="box-shadow: 5px 10px 20px #aaa;">
       </div>
       <div class="content">
         <a href="<%= news.url %>" target="_blank" class="header"><%= news.title %> </a>
@@ -424,7 +428,7 @@
             <p>Please search again 
           </p>
         </div>
-        <a href="/blogs" class="ui left labeled right floated icon button">
+        <a href="/news" class="ui left labeled right floated icon button">
           <i class="left arrow icon"></i>
           Go Back
         </a>
@@ -458,7 +462,7 @@
   $('.message .close').on('click', function() {
     $(this).closest('.message').fadeOut();
     });
-    setTimeout(function(){ $('.message').fadeOut(); }, 2000);
+    setTimeout(function(){ $('.message').fadeOut(); }, 4000);
 
     $('.ui.radio.checkbox')
     .checkbox()

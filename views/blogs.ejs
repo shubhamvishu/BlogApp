@@ -27,15 +27,14 @@
     </div>
 </div>
 
-<div class="ui left fixed vertical menu" style="top: 10%;width: 20%;background-color: whitesmoke;border: none;">
-    
+<div class="ui left fixed vertical menu" style="top: 10%;width: 20%;background-color: whitesmoke;border: none;box-shadow: inset 5px 10px 20px #ccc;">    
     
   <i class="massive blue gripfire icon" style="margin:10px auto;display: block;"></i>
   <div class="item">
-    <div class="ui centre aligned segment" style="width: 90%;margin: 10px auto;background-color: #fff;color: whitesmoke;border: none;box-shadow: -10px 10px 20px 20px #eee;">
+    <div class="ui centre aligned segment" style="width: 90%;margin: 10px auto;background-color: #fff;color: whitesmoke;border: none;box-shadow:  5px 10px 30px #ddd;">
       <div class="ui form">
           <div id="news-category" class="grouped fields">
-              <label for="fruit"><b>Select the category:</b></label>
+              <label for="fruit"><b>Select News category:</b></label>
               <div class="field">
                   <div class="ui toggle checkbox">
                       <input id="check1" type="checkbox" tabindex="0" class="hidden" onchange="catfunc(event)">
@@ -60,10 +59,11 @@
   </div>
   
 
-  <div class="ui selection dropdown" style="margin:10px auto;width: 100%;border: none;">
+  <div class="item" style="margin: 10px auto;width: 80%;">
+    <div class="ui selection dropdown" style="margin:20px auto;border: none;box-shadow: -10px 10px 30px 10px #ddd;">
       <input type="hidden" name="gender">
-      <div class="default text">Country</div>
       <i class="dropdown icon"></i>
+      <div class="default text">Country</div>
       <div class="menu" style="margin:10px auto;width: 80%;">
         <a href="/news/in" class="item" data-value="in">India</a>
         <a href="/news/us" class="item" data-value="us">US</a>
@@ -71,8 +71,8 @@
         <a href="/news/ar" class="item" data-value="ar">Argentina</a>
         <a href="/news/au" class="item" data-value="au">Australia</a>
       </div>
-  </div>
-  <div class="ui fluid search selection dropdown" style="border: none;">
+    </div>
+    <div class="ui fluid search selection dropdown" style="border: none;box-shadow: -10px 10px 30px 10px #ddd;">
       <input type="hidden" name="country">
       <i class="dropdown icon"></i>
       <div class="default text">Select Country</div>
@@ -321,42 +321,45 @@
         <div class="item" data-value="zw"><i class="zw flag"></i>Zimbabwe</div>
       </div>
   </div>
-  <a class="ui button large green" href="/blogs/new" class="item" style="text-align:center;padding:20px 40px;margin: 30px 20%; border-radius: 30px;box-sizing: border-box;box-shadow: -10px 10px 30px 10px #bbb;">
-    Create
-    <i class="right plus circle icon"></i>
-  </a>
+  </div>
+  <div class="item" style="margin: 10px auto;width: 100%;">
+    <a class="ui button large green" href="/blogs/new" class="item" data-tooltip="Create you own blog post" data-position="top right" data-inverted="" style="text-align:center;padding:20px 30px;margin: 30px 20%; border-radius: 30px;box-sizing: border-box;box-shadow: -10px 10px 30px 10px #bbb;">
+      Create
+      <i class="right plus circle icon"></i>
+    </a>
+  </div>
+  
 </div>
 
-<div class="ui right fixed vertical menu" style="top: 10%;width: 20%;background-color: whitesmoke;">
-      <div class="ui vertical menu">
-        <div class="item">
-          <div class="ui input"><input type="text" placeholder="Search..."></div>
+<div class="ui right fixed vertical menu" style="top: 10%;width: 20%;background-color: whitesmoke;border: none;box-shadow: inset 5px 10px 20px #ccc;">
+  <div class="ui vertical menu" style="border: none;box-shadow: 5px 10px 20px #ddd;margin: 10px auto;">
+      <div class="item">
+        <div class="ui input"><input type="text" placeholder="Search..."></div>
+      </div>
+      <div class="item">
+        Home
+        <div class="menu">
+          <a class="active item">Search</a>
+          <a class="item">Add</a>
+          <a class="item">Remove</a>
         </div>
-        <div class="item">
-          Home
-          <div class="menu">
-            <a class="active item">Search</a>
-            <a class="item">Add</a>
-            <a class="item">Remove</a>
-          </div>
+      </div>
+      <a class="item">
+        <i class="grid layout icon"></i> Browse
+      </a>
+      <a class="item">
+        Messages
+      </a>
+      <div class="ui dropdown item">
+        More
+        <i class="dropdown icon"></i>
+        <div class="menu">
+          <a class="item"><i class="edit icon"></i> Edit Profile</a>
+          <a class="item"><i class="globe icon"></i> Choose Language</a>
+          <a class="item"><i class="settings icon"></i> Account Settings</a>
         </div>
-        <a class="item">
-          <i class="grid layout icon"></i> Browse
-        </a>
-        <a class="item">
-          Messages
-        </a>
-        <div class="ui dropdown item">
-          More
-          <i class="dropdown icon"></i>
-          <div class="menu">
-            <a class="item"><i class="edit icon"></i> Edit Profile</a>
-            <a class="item"><i class="globe icon"></i> Choose Language</a>
-            <a class="item"><i class="settings icon"></i> Account Settings</a>
-          </div>
-        </div>
-      </div>    
-    
+      </div>
+    </div>
 </div>
 
 <div class="ui divided items" style="width: 50%;margin: 8% auto;">
@@ -371,13 +374,13 @@
     <% posts.posts.forEach((post)=>{ %>
     <div class="item">
       <div class="ui tiny image">
-        <img src="<%= post.imageLink %>">
+        <img src="<%= post.imageLink %>" style="box-shadow: 5px 10px 20px #aaa;">
       </div>
       <div class="content">
         <a href="/blogs/<%=post._id%>" class="header"><%= post.title %> </a>
         <div class="meta">
             <span class="cinema">Author : <%= post.author %> , <%= post.date %></span>
-            <a href="/blogs/<%=post._id%>" class="ui right floated primary button">
+            <a href="/blogs/<%=post._id%>" class="ui right floated primary button" style="box-shadow: 5px 10px 20px #aaa;">
                 Show post
                 <i class="right chevron icon"></i>
             </a>
@@ -430,10 +433,18 @@
       
     </div>
     <div class="actions">
-      <div class="ui black right icon button">
+      <a class="ui green left floated ok right icon button">
         Like
         <i class="thumbs up icon"></i>
-      </div>
+      </a>
+      <a class="ui blue left floated ok right icon button">
+        Dislike
+        <i class="thumbs down icon"></i>
+      </a>
+      <a class="ui black cancel right icon button">
+        Close
+        <i class="close icon"></i>
+      </a>
     </div>
   </div>
 <% } %>
@@ -453,7 +464,45 @@
     $('.ui.checkbox')
     .checkbox()
     ;
-    $('.ui.modal').modal('show');
+    $('.ui.modal')
+            .modal({
+              closable  : false,
+              onDeny    : function(){
+                //form.submit();
+                location.replace("/blogs");
+                return false;
+              },
+              onApprove : function() {
+                location.replace("/blogs");
+              }
+            })
+            .modal('show')
+          ;
+    function catfunc(event){
+        console.log(event);
+        var x = event.srcElement.checked;
+        x = !x;
+        console.log(x);
+        document.querySelector("#check1").checked=false;
+        document.querySelector("#check2").checked=false;
+        document.querySelector("#check3").checked=false;
+        console.log("cat function");
+        if(x == true){
+          console.log("FALSING");
+          event.srcElement.checked=false;
+        }
+        else {
+          event.srcElement.checked=true;
+        }
+
+        if(event.srcElement.checked && event.srcElement.id=="check1"){
+          location.replace("/news/top-headlines");
+        }
+        if(event.srcElement.checked && event.srcElement.id=="check2"){
+          location.replace("/news/everything");
+        }
+
+  }
   function myFunc(){
       console.log("shubham");
       var t = document.getElementById("searchbox").value;
