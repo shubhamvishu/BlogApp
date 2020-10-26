@@ -224,7 +224,7 @@ app.get("/home",function(req,res){
     res.redirect("/");
 });
 app.get("/",function(req,res){
-    res.send("homepage");
+    res.render("home");
 });
 app.get("/error",function(req,res){
     res.send("error");

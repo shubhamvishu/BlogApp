@@ -1,18 +1,18 @@
 <%- include('./partials/header.ejs') %>
 <body>
-<div class="ui black inverted menu" style="width:100%;height:10%;position: fixed;top: 0;left: 0;z-index: 1;">
+<div class="ui inverted menu" style="width:100%;height:10%;position: fixed;top: 0;left: 0;z-index: 1;background-color: rgb(23, 26, 49);">
     <a href="/home" class="top item">
       <h2>BlogApp</h2>
       <i class="big blue gripfire icon" style="margin:10px auto;display: block;"></i>  
     </a>
     <a href="/home" class="item">
-      <i class="home icon"></i> Home
+      <i class="home large icon"></i> <b>Home</b>
     </a>
     <a href="/news" class="item">
-      <i class="mail icon"></i> News
+      <i class="newspaper large icon"></i> <b>News</b>
     </a>
     <a href="/blogs" class="item">
-      <i class="user icon"></i> Blogs
+      <i class="image large icon"></i> <b>Blogs</b>
     </a>
     <div class="right menu">
       <div class="item">
@@ -27,12 +27,12 @@
     </div>
 </div>
 
-<div class="ui left fixed vertical menu" style="top: 10%;width: 20%;background-color: whitesmoke;">
+<div class="ui left fixed vertical menu" style="top: 10%;width: 20%;background-color: whitesmoke;border: none;">
     
     
     <i class="massive blue gripfire icon" style="margin:10px auto;display: block;"></i>
-    
-    <div class="ui centre aligned segment" style="width: 80%;margin: 10px auto;background-color: #fff;color: whitesmoke;">
+    <div class="item">
+      <div class="ui centre aligned segment" style="width: 90%;margin: 10px auto;background-color: #fff;color: whitesmoke;border: none;box-shadow: -10px 10px 20px 20px #eee;">
         <div class="ui form">
             <div id="news-category" class="grouped fields">
                 <label for="fruit"><b>Select the category:</b></label>
@@ -57,8 +57,10 @@
             </div>        
         </div>
     </div>
+    </div>
+    
 
-    <div class="ui selection dropdown" style="margin:10px auto;width: 100%;">
+    <div class="ui selection dropdown" style="margin:10px auto;width: 100%;border: none;">
         <input type="hidden" name="gender">
         <div class="default text">Country</div>
         <i class="dropdown icon"></i>
@@ -70,7 +72,7 @@
           <a href="/news/au" class="item" data-value="au">Australia</a>
         </div>
     </div>
-    <div class="ui fluid search selection dropdown">
+    <div class="ui fluid search selection dropdown" style="border: none;">
         <input type="hidden" name="country">
         <i class="dropdown icon"></i>
         <div class="default text">Select Country</div>
@@ -318,16 +320,14 @@
           <div class="item" data-value="zm"><i class="zm flag"></i>Zambia</div>
           <div class="item" data-value="zw"><i class="zw flag"></i>Zimbabwe</div>
         </div>
-      </div>
-    <a class="item">Features</a>
-    <a class="item">Testimonials</a>
-    <a class="ui button large green" href="/blogs/new" class="item" style="margin: 20px 20%; border-radius: 20px;">
+    </div>
+    <a class="ui button large green" href="/blogs/new" class="item" style="text-align:center;padding:20px 40px;margin: 30px 20%; border-radius: 30px;box-sizing: border-box;box-shadow: -10px 10px 30px 10px #bbb;">
       Create
       <i class="right plus circle icon"></i>
     </a>
 </div>
 
-<div class="ui right fixed vertical menu" style="top: 10%;width: 20%;background-color: whitesmoke;">
+<div class="ui right fixed vertical menu" style="top: 10%;width: 20%;background-color: whitesmoke;border: none;">
     <div class="ui vertical menu">
         <div class="item">
           <div class="ui input"><input type="text" placeholder="Search..."></div>
@@ -458,6 +458,8 @@
   $('.message .close').on('click', function() {
     $(this).closest('.message').fadeOut();
     });
+    setTimeout(function(){ $('.message').fadeOut(); }, 2000);
+
     $('.ui.radio.checkbox')
     .checkbox()
     ;
