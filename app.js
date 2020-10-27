@@ -232,6 +232,6 @@ app.get("/error",function(req,res){
 app.get("/*",function(req,res){
     res.send("404 not found");
 });
-app.listen(8080,function(){
-    console.log("EXPRESS");
+app.listen(process.env.PORT || 5000,function(){
+    console.log("EXPRESS APP STARTED");
 });
