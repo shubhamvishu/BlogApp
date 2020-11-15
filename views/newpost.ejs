@@ -23,13 +23,23 @@
           <i class="search link icon"></i>
         </div>
       </div>
-      <a class="ui item">
+      <% if(posts.profile!=null) { %>
+        <a href="#" class="ui item">
+          <% if(posts.profile.username){ %>
+            <%= posts.profile.username %>
+          <% } %>
+          <% if(posts.profile.displayName){ %>
+            <%= posts.profile.displayName %>
+          <% } %>
+        </a>
+      <% } %>
+      <a href="/auth/logout" class="ui item">
         Logout
       </a>
     </div>
 </div>
 
-<div style="display:inline-flex;width: 100%;margin-top: 8%;">
+<div style="display:inline-flex;width: 100%;margin-top: 6%;">
   
   <div style="width: 45%;">
     <div class="ui segment" style="width: 70%;margin:0 auto;box-shadow: 5px 5px 50px 10px #ccc;border-radius: 10px;">
@@ -48,7 +58,7 @@
             <div class="required field" style="min-width: 100%;">
                 <label>Title</label>
                 <div class="ui left icon input">
-                  <input id="title" type="text" name="title" placeholder="Title of the post" style="background-color: whitesmoke;" required>
+                  <input id="title" type="text" name="title" placeholder="Title of the post" style="background-color: #fff;box-shadow: 0px 0px 10px 0px #ddd" required>
                   <i class="pencil alternate icon"></i>
                 </div>
               </div>
@@ -57,20 +67,20 @@
         <div class="field" style="min-width: 100%;">
             <label>Author</label>
             <div class="ui left icon input">
-              <input id="author" type="text" name="author" placeholder="Author" style="background-color: whitesmoke;" required> 
+              <input id="author" type="text" name="author" placeholder="Author" style="background-color: #fff;box-shadow: 0px 0px 10px 0px #ddd" required> 
               <i class="user icon"></i>
             </div>       
         </div>
         <div class="field" style="min-width: 100%;">
           <label>Image Link</label>
           <div class="ui left icon input">
-            <input id="imagelink" type="text" name="imagelink" placeholder="Image Link" style="background-color: whitesmoke;" required> 
+            <input id="imagelink" type="text" name="imagelink" placeholder="Image Link" style="background-color: #fff;box-shadow: 0px 0px 10px 0px #ddd" required> 
             <i class="image icon"></i>
           </div>       
         </div>
         <div class="field" style="min-width: 100%;">
             <label>Description</label>
-            <textarea id="desp" name="desp" style="background-color: whitesmoke;margin-top: 0px; margin-bottom: 0px; height: 112px;min-width: 100%;" required></textarea>
+            <textarea id="desp" name="desp" style="background-color: #fff;box-shadow: 0px 0px 10px 0px #ddd;margin-top: 0px; margin-bottom: 0px; height: 112px;min-width: 100%;" required></textarea>
         </div>
         <button class="ui button huge primary" type="submit" onclick="sub()" style="width: 100%;margin:10px auto;text-align: center;border-radius: 30px;">
           Create

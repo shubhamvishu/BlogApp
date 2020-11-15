@@ -21,7 +21,17 @@
           <i class="search link icon"></i>
         </div>
       </div>
-      <a class="ui item">
+      <% if(posts.isloggedin) { %>
+      <a href="#" class="ui item">
+        <% if(posts.profile.username){ %>
+          <%= posts.profile.username %>
+        <% } %>
+        <% if(posts.profile.displayName){ %>
+          <%= posts.profile.displayName %>
+        <% } %>
+      </a>
+      <% } %>
+      <a href="/auth/logout" class="ui item">
         Logout
       </a>
     </div>
@@ -399,19 +409,16 @@
     <% }); 
     }  %> 
      <%if(!posts.posts.length) { %>
-        <div class="ui negative message">
-            <i class="close icon"></i>
-            <div class="header">
-              We're sorry we can't found any blogs
-            </div>
-            <p>Please try again after sometime
-          </p>
-        </div>
-        
-        <a href="/blogs" class="ui left labeled right floated icon button">
+        <div class="ui placeholder segment">
+          <div class="ui icon header">
+            <i class="image outline icon"></i>
+            No posts exists currently
+          </div>
+          <a href="/blogs" class="ui left labeled right floated icon button">
             <i class="left arrow icon"></i>
             Go Back
         </a>
+        </div>
     <% } %>
 </div>
 

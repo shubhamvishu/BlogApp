@@ -22,7 +22,17 @@
           <i class="search link icon"></i>
         </div>
       </div>
-      <a class="ui item">
+      <% if(posts.profile!=null) { %>
+        <a href="#" class="ui item">
+          <% if(posts.profile.username){ %>
+            <%= posts.profile.username %>
+          <% } %>
+          <% if(posts.profile.displayName){ %>
+            <%= posts.profile.displayName %>
+          <% } %>
+        </a>
+      <% } %>
+      <a href="/auth/logout" class="ui item">
         Logout
       </a>
     </div>

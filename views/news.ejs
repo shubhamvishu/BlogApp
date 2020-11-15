@@ -1,5 +1,22 @@
 <%- include('./partials/header.ejs') %>
+<style>
+  @media only screen and (max-width: 750px){
+
+    #left-column{
+      display: none;
+    }
+    #right-column{
+      display: none;
+    }
+    #main-column{
+      min-width: 80%;
+    }
+  }
+  
+</style>
 <body>
+  P
+'/{
 <div class="ui inverted menu" style="width:100%;height:10%;position: fixed;top: 0;left: 0;z-index: 1;background-color: rgb(23, 26, 49);">
     <a href="/home" class="top item">
       <h2>BlogApp</h2>
@@ -21,13 +38,23 @@
           <i class="search link icon"></i>
         </div>
       </div>
-      <a class="ui item">
+      <% if(newses.profile!=null) { %>
+        <a href="#" class="ui item">
+          <% if(newses.profile.username){ %>
+            <%= newses.profile.username %>
+          <% } %>
+          <% if(newses.profile.displayName){ %>
+            <%= newses.profile.displayName %>
+          <% } %>
+        </a>
+      <% } %>
+      <a href="/auth/logout" class="ui item">
         Logout
       </a>
     </div>
 </div>
 
-<div class="ui left fixed vertical menu" style="top: 10%;width: 20%;background-color: whitesmoke;border: none;box-shadow: inset 5px 10px 20px #ccc;">    
+<div id="left-column" class="ui left fixed vertical menu" style="top: 10%;width: 20%;background-color: whitesmoke;border: none;box-shadow: inset 5px 10px 20px #ccc;">    
     
     <i class="massive blue gripfire icon" style="margin:10px auto;display: block;"></i>
     <div class="item">
@@ -331,7 +358,7 @@
     
 </div>
 
-<div class="ui right fixed vertical menu" style="top: 10%;width: 20%;background-color: whitesmoke;border: none;box-shadow: inset 5px 10px 20px #ccc;">
+<div id="right-column" class="ui right fixed vertical menu" style="top: 10%;width: 20%;background-color: whitesmoke;border: none;box-shadow: inset 5px 10px 20px #ccc;">
     <div class="ui vertical menu" style="border: none;box-shadow: 5px 10px 20px #ddd;margin: 10px auto;">
         <div class="item">
           <div class="ui input"><input type="text" placeholder="Search..."></div>
@@ -372,7 +399,7 @@
     <div class="results"></div>
 </div>
 
-<div class="ui divided items" style="width: 50%;margin: 3% auto;overflow: hidden;">
+<div id="main-column" class="ui divided items" style="width: 50%;margin: 3% auto;overflow: hidden;">
     <% if(newses.size) {%>
         <div class="ui success message">
             <i class="close icon"></i>

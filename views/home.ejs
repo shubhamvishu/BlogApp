@@ -124,14 +124,17 @@
     <a href="/home" class="active item">Home</a>
     <a href="/news" class="item">News</a>
     <a href="/blogs" class="item">Blogs</a>
-    <div class="right menu">
-      <div class="item">
-        <a class="ui button">Log in</a>
+      <div class="right menu">
+        <% if(!data.isloggedin) { %>
+        <div class="item">
+          <a href="/auth/login" class="ui button">Log in</a>
+        </div>
+        <div class="item">
+          <a href="/auth/register" class="ui primary button">Sign Up</a>
+        </div>
+        <% } %>
       </div>
-      <div class="item">
-        <a class="ui primary button">Sign Up</a>
-      </div>
-    </div>
+    
   </div>
 </div>
 
@@ -140,8 +143,10 @@
   <a href="/home" class="active item">Home</a>
   <a href="/news" class="item">News</a>
   <a href="/blogs" class="item">Blogs</a>
-  <a class="item">Login</a>
-  <a class="item">Signup</a>
+  <% if(!data.isloggedin) { %>
+  <a href="/auth/login" class="item">Login</a>
+  <a href="/auth/register" class="item">Signup</a>
+  <% } %>
 </div>
 
 
@@ -159,8 +164,10 @@
         <a href="/news" class="item">News</a>
         <a href="/blogs" class="item">Blogs</a>
         <div class="right item">
-          <a class="ui inverted button">Log in</a>
-          <a class="ui inverted button">Sign Up</a>
+          <% if(!data.isloggedin) { %>
+          <a href="/auth/login" class="ui inverted button">Log in</a>
+          <a href="/auth/register" class="ui inverted button">Sign Up</a>
+          <% } %>
         </div>
       </div>
     </div>
@@ -195,7 +202,7 @@
             <img src="/img/blogging.svg">
           </div>
           <div class="eight wide column" style="padding: 2em;box-shadow: -10px 10px 20px 20px #eee;border: none;">
-              <div>
+              <div class="ui segment" style="padding: 2em;box-shadow: -10px 10px 20px 20px #eee;border: none;">
                 <h3 class="ui header">Create and share blogs</h3>
                 <p>Read and share other blogs or create your own</p>
               </div> 
