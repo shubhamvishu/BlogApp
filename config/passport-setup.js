@@ -1,5 +1,5 @@
 const passport = require('passport');
-const GoogleStrategy = require('passport-google-oauth20');
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const LocalStrategy = require('passport-local');
 const keys = require('./keys');
 const User = require("../models/user");
@@ -57,6 +57,7 @@ function chooseGoogleStrategy(req,res,next){
                 console.log(err);
             }
             else{
+                console.log(profile);
                 if(user==null){
                     console.log("NO USER");
                     new User({name:profile.displayName,username:profile.emails[0].value,password:null,googleid:profile.id,hash:null,salt:null}).save();

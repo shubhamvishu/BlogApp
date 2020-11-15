@@ -57,15 +57,13 @@ router.post("/login",Auth.chooseLocalStrategy, passport.authenticate("local",{
 });
 
 router.get("/google",Auth.chooseGoogleStrategy, passport.authenticate('google',{
-    scope:['profile']
+    scope:['profile','email']
 }),(req,res)=>{
     res.send("google login here");
 });
 
 router.get("/google/redirect",passport.authenticate('google',{failureRedirect:'/'}),(req,res)=>{
-    console.log("\n\n\nREDIRECTED\n\n\n")
-    console.log(req.User);
-    console.user
+    console.log("\n\n\nREDIRECTED\n\n\n");
     res.redirect('/home');
 });
 
