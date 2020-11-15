@@ -46,12 +46,12 @@ router.post("/register",function(req,res){
 });
 
 router.get("/login",isLoggedIn,function(req,res){
-    res.render("login");
+    res.render("login",{msg:""});
 });
 
 router.post("/login",Auth.chooseLocalStrategy, passport.authenticate("local",{
-    successRedirect : "/home",
-    failureRedirect :"/error"
+    successRedirect : "/news",
+    failureRedirect :"/auth/login"
 }),function(req,res){
     res.send("logged in");
 });
@@ -64,7 +64,7 @@ router.get("/google",Auth.chooseGoogleStrategy, passport.authenticate('google',{
 
 router.get("/google/redirect",passport.authenticate('google',{failureRedirect:'/'}),(req,res)=>{
     console.log("\n\n\nREDIRECTED\n\n\n");
-    res.redirect('/home');
+    res.redirect('/news');
 });
 
 router.get("/logout",(req,res)=>{

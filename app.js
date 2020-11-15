@@ -49,10 +49,10 @@ app.get("/",function(req,res){
     res.render("home",{data:data});
 });
 app.get("/error",function(req,res){
-    res.send("error");
+    res.redirect("/home");
 });
 app.get("/*",function(req,res){
-    res.send("404 not found");
+    res.render("error/404")
 });
 app.listen(process.env.PORT || 5000,function(){
     console.log("EXPRESS APP STARTED");

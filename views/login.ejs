@@ -11,6 +11,14 @@
             <i class="left arrow large icon"></i>
           </a>
         <h1 style="text-align: center;">Login</h1>
+        <% if(msg!=""){ %>
+        <div class="ui negative message" style="width: 90%;margin:10px auto;text-align: center;">
+            <i class="close icon"></i>
+            <div class="header">
+              <%=msg%>
+            </div>
+        </div>
+        <% } %>
         <form action="/auth/login" class="ui form" method="POST" style="display:flexbox;width:85%;justify-content: center;align-items: center;margin: 10px auto;" >
             
             <input type="text" name="username" placeholder="Username" style="min-width: 50%;margin-top: 20px;" required>
@@ -25,10 +33,15 @@
 </div>
 
 <a class="ui button" href="/auth/google" style="display:flex;margin:40px auto;width: 35%;text-align: center;justify-content: center;padding-top:10px;padding-bottom: 10px;background-color: #fff;box-shadow: 5px 5px 90px 30px #ddd;">
-        <i><img width="20px" style="margin-top:7px; margin-right:8px" alt="Google sign-in" 
+        <i><img width="20px" style="margin-right: 20px;" alt="Google sign-in" 
             src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
     </i>
-    Login with Google
+    <p>Login with Google</p>
 </a>
-
+<script>
+    $('.message .close').on('click', function() {
+    $(this).closest('.message').fadeOut();
+    });
+    setTimeout(function(){ $('.message').fadeOut(); }, 4000);
+</script>
 <%- include('./partials/footer.ejs') %> 
