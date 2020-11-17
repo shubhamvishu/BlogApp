@@ -82,7 +82,7 @@ function chooseFacebookStrategy(req,res,next){
     passport.use(new FacebookStrategy({
         clientID: keys.facebook.clientID,
         clientSecret: keys.facebook.clientSecret,
-        callbackURL: "http://localhost:5000/auth/facebook/redirect",
+        callbackURL: "/auth/facebook/redirect",
         profileFields: ['id', 'displayName', 'photos', 'email']
       },
       function(accessToken, refreshToken, profile, cb) {
