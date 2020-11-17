@@ -27,6 +27,7 @@ router.get("/",isLoggedIn,function(req,res){
         };
         if(err){
             console.log("Error parsing DB");
+            res.redirect("/news");
         }
         else{
             console.log("GET ALL POSTS");
@@ -59,6 +60,7 @@ router.post("/",isLoggedIn,function(req,res){
     Blog.create(newBlog,function(err,blogs){
         if(err){
             console.log("Error in creation");
+            res.redirect("/blogs");
         }
         else{
             console.log("Added");
@@ -76,6 +78,7 @@ router.get("/:id",isLoggedIn,function(req,res){
         if(err){
             console.log(err);
             console.log("Error parsing DB I");
+            res.redirect("/blogs");
         }
         else{
             console.log("My POST");
@@ -93,6 +96,7 @@ router.get("/:id",isLoggedIn,function(req,res){
                 };
                 if(err){
                     console.log("Error parsing DB II");
+                    res.redirect("/blogs");
                 }
                 else{
                     console.log("GET 1 BLOG ID");
@@ -112,6 +116,7 @@ router.get("/:id/edit",isLoggedIn,function(req,res){
         if(err){
             console.log(err);
             console.log("Error parsing DB");
+            res.redirect("/blogs");
         }
         else{
             console.log("NEW");
@@ -145,7 +150,7 @@ router.put("/:id",isLoggedIn,function(req,res){
     Blog.findByIdAndUpdate(req.params.id,req.body.blog,function(err, updatedBlog){
         if(err){
             console(err);
-            //res.redirect("/blogs");
+            res.redirect("/blogs");
         }
         else{
             console.log("UPDATED");
@@ -160,6 +165,7 @@ router.delete("/:id",isLoggedIn,function(req,res){
     Blog.findByIdAndRemove(req.params.id,function(err){
         if(err){
             console.log(err);
+            res.redirect("/blogs");
         }
         else{
             res.redirect("/blogs");

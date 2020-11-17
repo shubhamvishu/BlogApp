@@ -1,5 +1,6 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const FacebookStrategy = require('passport-facebook').Strategy;
 const LocalStrategy = require('passport-local');
 const keys = require('./keys');
 const User = require("../models/user");
@@ -60,7 +61,7 @@ function chooseGoogleStrategy(req,res,next){
                 console.log(profile);
                 if(user==null){
                     console.log("NO USER");
-                    new User({name:profile.displayName,username:profile.emails[0].value,password:null,googleid:profile.id,hash:null,salt:null}).save();
+                    new User({name:profile.displayName,logintype:2,username:profile.emails[0].value,password:null,googleid:profile.id,facebookid:null,hash:null,salt:null}).save();
                     console.log("ADDED NEW USER");
                 }
                 else{
@@ -77,9 +78,45 @@ function chooseGoogleStrategy(req,res,next){
     passport.deserializeUser(User.deserializeUser());
     return next();
 }
+function chooseFacebookStrategy(req,res,next){
+    passport.use(new FacebookStrategy({
+        clientID: keys.facebook.clientID,
+        clientSecret: keys.facebook.clientSecret,
+        callbackURL: "http://localhost:5000/auth/facebook/redirect",
+        profileFields: ['id', 'displayName', 'photos', 'email']
+      },
+      function(accessToken, refreshToken, profile, cb) {
+          console.log("FFFBBB");
+          console.log(profile);
+          User.findOne({facebookid:profile.id},(err,user)=>{
+            if(err){
+                console.log(err);
+            }
+            else{
+                console.log(profile);
+                if(user==null){
+                    console.log("NO USER");
+                    new User({name:profile.displayName,logintype:3,username:null,password:null,googleid:null,facebookid:profile.id,hash:null,salt:null}).save();
+                    console.log("ADDED NEW USER");
+                }
+                else{
+                    console.log("USER EXISTS");
+                    console.log(user);
+                }
+            }
+        });
+        console.log('ENDDD');
+        return cb(null, profile);
+      }
+    ));
+    passport.serializeUser(User.serializeUser());
+    passport.deserializeUser(User.deserializeUser());
+    return next();
+}
 
 module.exports = {
     chooseGoogleStrategy,
-    chooseLocalStrategy
+    chooseLocalStrategy,
+    chooseFacebookStrategy
 
 };

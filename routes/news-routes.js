@@ -53,11 +53,10 @@ function getNewsEndpoint(url,req,res){
         //res.render("news",{newses:response.data.articles});
     })
     .catch(function (error) {
-    // handle error
         console.log(error);
+        res.redirect("/news");
     })
     .then(function () {
-    // always executed
     });
 }
 module.exports = router;

@@ -26,11 +26,11 @@ router.get("/register",isLoggedIn,function(req,res){
     res.render("register");
 });
 
-router.post("/register",function(req,res){
+router.post("/register",isLoggedIn,function(req,res){
     //res.send("register");
     //req.body.username
     //req.body.password
-    User.register(new User({username:req.body.username,name:req.body.name,googleid:null}),req.body.password,function(err, user){
+    User.register(new User({name:req.body.name,logintype:1,username:req.body.username,googleid:null,facebookid:null}),req.body.password,function(err, user){
         if(err){
             console.log("\n\n\n\nERROR\n\n\n\n");
             console.log(err);
@@ -49,22 +49,33 @@ router.get("/login",isLoggedIn,function(req,res){
     res.render("login",{msg:""});
 });
 
-router.post("/login",Auth.chooseLocalStrategy, passport.authenticate("local",{
+router.post("/login",isLoggedIn,Auth.chooseLocalStrategy, passport.authenticate("local",{
     successRedirect : "/news",
     failureRedirect :"/auth/login"
 }),function(req,res){
     res.send("logged in");
 });
 
-router.get("/google",Auth.chooseGoogleStrategy, passport.authenticate('google',{
+router.get("/google",isLoggedIn,Auth.chooseGoogleStrategy, passport.authenticate('google',{
     scope:['profile','email']
 }),(req,res)=>{
     res.send("google login here");
 });
 
-router.get("/google/redirect",passport.authenticate('google',{failureRedirect:'/'}),(req,res)=>{
+router.get("/google/redirect",isLoggedIn,passport.authenticate('google',{failureRedirect:'/'}),(req,res)=>{
     console.log("\n\n\nREDIRECTED\n\n\n");
     res.redirect('/news');
+});
+
+router.get('/facebook',isLoggedIn,Auth.chooseFacebookStrategy,
+  passport.authenticate('facebook'));
+
+router.get('/facebook/redirect',isLoggedIn,
+    passport.authenticate('facebook', {failureRedirect:'/error',successRedirect:'/' }),
+    function(req, res) {
+        // Successful authentication, redirect home.
+        console.log("YAYYYY.....LOGGED IN");
+        res.redirect('/secret');
 });
 
 router.get("/logout",(req,res)=>{
