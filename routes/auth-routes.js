@@ -57,7 +57,8 @@ router.post("/login",isLoggedIn,Auth.chooseLocalStrategy, passport.authenticate(
 });
 
 router.get("/google",isLoggedIn,Auth.chooseGoogleStrategy, passport.authenticate('google',{
-    scope:['profile','email']
+    scope:['profile','email'],
+    prompt: 'select_account'
 }),(req,res)=>{
     res.send("google login here");
 });
