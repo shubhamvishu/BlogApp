@@ -46,8 +46,8 @@ function chooseGoogleStrategy(req,res,next){
     console.log("\n\n\n\nSHUBHAM\n\n\n\n");
     passport.use(new GoogleStrategy({
         callbackURL:'/auth/google/redirect',
-        clientID:keys.google.clientID,
-        clientSecret:keys.google.clientSecret
+        clientID: process.env.GclientID,
+        clientSecret: process.env.GclientSecret
     },(accessToken,refreshToken,profile,done)=>{
     
         console.log("passport callback");
@@ -80,8 +80,8 @@ function chooseGoogleStrategy(req,res,next){
 }
 function chooseFacebookStrategy(req,res,next){
     passport.use(new FacebookStrategy({
-        clientID: keys.facebook.clientID,
-        clientSecret: keys.facebook.clientSecret,
+        clientID: process.env.FclientID,
+        clientSecret: process.env.FclientSecret,
         callbackURL: "https://xyz0.herokuapp.com/auth/facebook/redirect",
         profileFields: ['id', 'displayName', 'photos', 'email']
       },

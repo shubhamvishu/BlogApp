@@ -1,5 +1,4 @@
 const passport = require('passport');
-const keys = require('./config/keys');
 var express =  require("express"),
     app = express(),
     bodyParser = require('body-parser'),
@@ -10,7 +9,7 @@ var express =  require("express"),
     blogRoutes = require('./routes/blogs-routes');
 
 //mongoose.connect("mongodb://localhost/authdemo",{ useNewUrlParser: true,useUnifiedTopology: true} );
-mongoose.connect(keys.mongo.URI,{ useNewUrlParser: true,useUnifiedTopology: true} );
+mongoose.connect(process.env.URL,{ useNewUrlParser: true,useUnifiedTopology: true} );
 
 mongoose.set('useFindAndModify', false);
 app.use(express.static("public"));
