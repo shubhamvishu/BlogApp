@@ -45,7 +45,7 @@ function chooseLocalStrategy(req,res,next){
 function chooseGoogleStrategy(req,res,next){
     console.log("\n\n\n\nSHUBHAM\n\n\n\n");
     passport.use(new GoogleStrategy({
-        callbackURL:'/auth/google/redirect',
+        callbackURL:'https://xyz0.herokuapp.com/auth/google/redirect',
         clientID: process.env.GclientID,
         clientSecret: process.env.GclientSecret
     },(accessToken,refreshToken,profile,done)=>{
